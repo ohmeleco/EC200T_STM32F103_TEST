@@ -1,0 +1,188 @@
+#include "main.h"
+#include "Relay.h"
+
+void Set_Relay_On(unsigned int relay_Num)
+{
+	switch(relay_Num)
+	{
+		case(1):
+		{
+			HAL_GPIO_WritePin(R1_GPIO_Port,R1_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(2):
+		{
+			HAL_GPIO_WritePin(R2_GPIO_Port,R2_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(3):
+		{
+			HAL_GPIO_WritePin(R3_GPIO_Port,R3_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(4):
+		{
+			HAL_GPIO_WritePin(R4_GPIO_Port,R4_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(5):
+		{
+			HAL_GPIO_WritePin(R5_GPIO_Port,R5_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(6):
+		{
+			HAL_GPIO_WritePin(R6_GPIO_Port,R6_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(7):
+		{
+			HAL_GPIO_WritePin(R7_GPIO_Port,R7_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(8):
+		{
+			HAL_GPIO_WritePin(R8_GPIO_Port,R8_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(9):
+		{
+			HAL_GPIO_WritePin(R9_GPIO_Port,R9_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(10):
+		{
+			HAL_GPIO_WritePin(R10_GPIO_Port,R10_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(11):
+		{
+			HAL_GPIO_WritePin(R11_GPIO_Port,R11_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(12):
+		{
+			HAL_GPIO_WritePin(R12_GPIO_Port,R12_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(13):
+		{
+			HAL_GPIO_WritePin(R13_GPIO_Port,R13_Pin,GPIO_PIN_SET);
+			break;
+		}
+		case(14):
+		{
+			HAL_GPIO_WritePin(R14_GPIO_Port,R14_Pin,GPIO_PIN_SET);
+			break;
+		}
+	} 
+}
+
+void Set_Relay_Off(unsigned int relay_Num)
+{
+	switch(relay_Num)
+	{
+		case(1):
+		{
+			HAL_GPIO_WritePin(R1_GPIO_Port,R1_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(2):
+		{
+			HAL_GPIO_WritePin(R2_GPIO_Port,R2_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(3):
+		{
+			HAL_GPIO_WritePin(R3_GPIO_Port,R3_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(4):
+		{
+			HAL_GPIO_WritePin(R4_GPIO_Port,R4_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(5):
+		{
+			HAL_GPIO_WritePin(R5_GPIO_Port,R5_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(6):
+		{
+			HAL_GPIO_WritePin(R6_GPIO_Port,R6_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(7):
+		{
+			HAL_GPIO_WritePin(R7_GPIO_Port,R7_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(8):
+		{
+			HAL_GPIO_WritePin(R8_GPIO_Port,R8_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(9):
+		{
+			HAL_GPIO_WritePin(R9_GPIO_Port,R9_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(10):
+		{
+			HAL_GPIO_WritePin(R10_GPIO_Port,R10_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(11):
+		{
+			HAL_GPIO_WritePin(R11_GPIO_Port,R11_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(12):
+		{
+			HAL_GPIO_WritePin(R12_GPIO_Port,R12_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(13):
+		{
+			HAL_GPIO_WritePin(R13_GPIO_Port,R13_Pin,GPIO_PIN_RESET);
+			break;
+		}
+		case(14):
+		{
+			HAL_GPIO_WritePin(R14_GPIO_Port,R14_Pin,GPIO_PIN_RESET);
+			break;
+		}
+	}
+	
+}
+
+void Test_Relay(void)
+{
+	uint8_t i=0;
+	for(i=12;i>0;i--)
+	{
+		Set_Relay_On(i);
+		HAL_Delay(1000);
+		Set_Relay_Off(i);
+		HAL_Delay(1000);
+	}
+	for(i=14;i>12;i--)
+	{
+		Set_Relay_On(i);
+		HAL_Delay(1000);
+		Set_Relay_Off(i);
+		HAL_Delay(1000);
+	}
+}
+
+
+void SET_Relay_State(uint16_t value)
+{
+	uint8_t i;
+	for(i=0;i<14;i++)
+	{
+		if(value & 1<<i) Set_Relay_On(i+1);
+		else	Set_Relay_Off(i+1);
+	}
+}
+
